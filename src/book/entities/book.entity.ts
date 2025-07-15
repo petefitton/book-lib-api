@@ -5,18 +5,15 @@ export class Book {
   @Field(() => ID, { description: 'Id' })
   id: string;
 
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
-
-  @Field(() => String, { description: 'Example field (placeholder)' })
+  @Field(() => String, { description: 'Title' })
   title: string;
 
-  @Field(() => Int, { description: 'Example field (placeholder)' })
+  @Field(() => Int, { description: 'Published Year' })
   publishedYear: number;
 
-  @Field(() => String, { description: 'Example field (placeholder)' })
+  @Field(() => String, { description: 'Genre' })
   genre: string;
 
-  // @Field(() => Author, { description: 'Example field (placeholder)' })
+  // @Field(() => Author, { description: 'Author' })
   // author: Author;
 }
