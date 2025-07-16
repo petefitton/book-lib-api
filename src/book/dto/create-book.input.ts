@@ -14,6 +14,6 @@ export class CreateBookInput {
   @Field(() => String, { description: 'Genre' })
   genre: string;
 
-  // @Field(() => Author, { description: 'Author' })
-  // author: Author;
+  @Field(() => ID, { description: 'Author ID' })
+  authorId: number;
 }

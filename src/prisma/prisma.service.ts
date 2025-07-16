@@ -16,10 +16,13 @@ export class PrismaService extends PrismaClient {
     });
   }
 
-  // cleanDb() {
-  //   return this.$transaction([
-  //     this.author.deleteMany(),
-  //     this.book.deleteMany(),
-  //   ]);
-  // }
+  cleanDb() {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+    return this.$transaction([
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      this.author.deleteMany(),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      this.book.deleteMany(),
+    ]);
+  }
 }

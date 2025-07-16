@@ -1,4 +1,5 @@
 import { InputType, Int, Field, ID } from '@nestjs/graphql';
+import { CreateBookInput } from '../../book/dto/create-book.input';
 
 @InputType()
 export class CreateAuthorInput {
@@ -11,6 +12,10 @@ export class CreateAuthorInput {
   @Field(() => Int, { description: 'Birth Year' })
   birthYear?: number;
 
-  // @Field(() => Book, { description: 'Books written by Author' })
-  // books?: Book;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Field((type) => [CreateBookInput], {
+    nullable: 'items',
+    description: 'Books written by Author',
+  })
+  books: CreateBookInput[];
 }

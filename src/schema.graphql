@@ -1,0 +1,117 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""book"""
+type Book {
+  """Id"""
+  id: ID!
+
+  """Title"""
+  title: String!
+
+  """Published Year"""
+  publishedYear: Int!
+
+  """Genre"""
+  genre: String!
+
+  """Author ID"""
+  authorId: ID!
+
+  """Author"""
+  author: Author!
+}
+
+"""author"""
+type Author {
+  """Id"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Birth Year"""
+  birthYear: Int!
+
+  """Books written by Author"""
+  books: [Book]!
+}
+
+type Query {
+  authors: [Author!]!
+  author(id: Int!): Author!
+  books: [Book!]!
+  book(id: Int!): Book!
+}
+
+type Mutation {
+  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
+  updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
+  removeAuthor(id: Int!): Author!
+  createBook(createBookInput: CreateBookInput!): Book!
+  updateBook(updateBookInput: UpdateBookInput!): Book!
+  removeBook(id: Int!): Book!
+}
+
+input CreateAuthorInput {
+  """Id"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Birth Year"""
+  birthYear: Int!
+
+  """Books written by Author"""
+  books: [CreateBookInput]!
+}
+
+input CreateBookInput {
+  """Id"""
+  id: ID!
+
+  """Title"""
+  title: String!
+
+  """Published Year"""
+  publishedYear: Int!
+
+  """Genre"""
+  genre: String!
+
+  """Author ID"""
+  authorId: ID!
+}
+
+input UpdateAuthorInput {
+  """Id"""
+  id: ID!
+
+  """Name"""
+  name: String!
+
+  """Birth Year"""
+  birthYear: Int!
+
+  """Books written by Author"""
+  books: [CreateBookInput]!
+}
+
+input UpdateBookInput {
+  """Id"""
+  id: ID!
+
+  """Title"""
+  title: String!
+
+  """Published Year"""
+  publishedYear: Int!
+
+  """Genre"""
+  genre: String!
+
+  """Author ID"""
+  authorId: ID!
+}

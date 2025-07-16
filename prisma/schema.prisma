@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -19,8 +19,9 @@ model Book {
   title String
   publishedYear Int?
   genre String?
-  authorid Int
-  author Author @relation(fields: [authorid], references: [id])
+  authorId Int
+  author Author @relation(fields: [authorId], references: [id])
+  @@map("books")
 }
 
 model Author {
@@ -28,4 +29,5 @@ model Author {
   name String
   birthYear Int?
   books Book[]
+  @@map("authors")
 }

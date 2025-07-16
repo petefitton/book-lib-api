@@ -12,16 +12,19 @@ export class AuthorResolver {
   createAuthor(
     @Args('createAuthorInput') createAuthorInput: CreateAuthorInput,
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.authorService.create(createAuthorInput);
   }
 
-  @Query(() => [Author], { name: 'author' })
+  @Query(() => [Author], { name: 'authors' })
   findAll() {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.authorService.findAll();
   }
 
   @Query(() => Author, { name: 'author' })
   findOne(@Args('id', { type: () => Int }) id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.authorService.findOne(id);
   }
 
@@ -34,6 +37,7 @@ export class AuthorResolver {
 
   @Mutation(() => Author)
   removeAuthor(@Args('id', { type: () => Int }) id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.authorService.remove(id);
   }
 }

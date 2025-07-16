@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { Book } from '../../book/entities/book.entity';
 
 @ObjectType({ description: 'author' })
 export class Author {
@@ -11,6 +12,10 @@ export class Author {
   @Field(() => Int, { description: 'Birth Year' })
   birthYear?: number;
 
-  // @Field(() => Book, { description: 'Books written by Author' })
-  // books?: Book;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Field((type) => [Book], {
+    nullable: 'items',
+    description: 'Books written by Author',
+  })
+  books: Book[];
 }

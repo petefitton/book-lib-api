@@ -1,26 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { CreateBookInput } from './dto/create-book.input';
 import { UpdateBookInput } from './dto/update-book.input';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class BookService {
+  constructor(private prisma: PrismaService) {}
+
   create(createBookInput: CreateBookInput) {
-    return 'This action adds a new book';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    return this.prisma.book.create({
+      data: {
+        title: createBookInput.title,
+        publishedYear: createBookInput.publishedYear,
+        genre: createBookInput.genre,
+        authorId: createBookInput.authorId,
+      },
+    });
   }
 
   findAll() {
-    return `This action returns all book`;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    return this.prisma.book.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} book`;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    return this.prisma.book.findUnique({
+      where: {
+        id,
+      },
+      include: { author: true },
+    });
   }
 
-  update(id: number, updateBookInput: UpdateBookInput) {
-    return `This action updates a #${id} book`;
+  async update(id: number, updateBookInput: UpdateBookInput) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const book = await this.prisma.book.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (!book) {
+      throw new ForbiddenException('Access to resource denied');
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: updateBookInput.title,
+        publishedYear: updateBookInput.publishedYear,
+        genre: updateBookInput.genre,
+        authorId: updateBookInput.authorId,
+      },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} book`;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    return this.prisma.author.delete({
+      where: {
+        id: id,
+      },
+    });
   }
 }

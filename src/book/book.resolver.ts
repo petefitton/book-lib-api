@@ -10,16 +10,19 @@ export class BookResolver {
 
   @Mutation(() => Book)
   createBook(@Args('createBookInput') createBookInput: CreateBookInput) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.bookService.create(createBookInput);
   }
 
-  @Query(() => [Book], { name: 'book' })
+  @Query(() => [Book], { name: 'books' })
   findAll() {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.bookService.findAll();
   }
 
   @Query(() => Book, { name: 'book' })
   findOne(@Args('id', { type: () => Int }) id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.bookService.findOne(id);
   }
 
@@ -30,6 +33,7 @@ export class BookResolver {
 
   @Mutation(() => Book)
   removeBook(@Args('id', { type: () => Int }) id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.bookService.remove(id);
   }
 }
